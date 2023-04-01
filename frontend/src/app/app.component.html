@@ -1,0 +1,25 @@
+<nav class="navbar navbar-dark">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/register">Spordiklubi</a>
+    </div>
+    <div class="nav navbar-nav navbar-right">
+      <button routerLink="/list" mat-raised-button color="accent">Vaata treenijaid</button>
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-4">
+  <router-outlet></router-outlet>
+</div>
+
+<lib-ng-toast></lib-ng-toast>
+<ng-confirm></ng-confirm>
+
+<!-- Footer -->
+<footer class="footer p-4">
+  <hr/>
+  <div class="div p-4">
+    © 2023 Proudly created with Angular.
+  </div>
+</footer>

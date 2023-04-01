@@ -1,0 +1,45 @@
+.mat-column-nr {
+    flex: 0 0 5%;
+}
+
+.mat-column-gender {
+    flex: 0 0 7%;
+}
+
+.mat-column-mobile {
+    flex: 0 0 10%;
+}
+
+.mat-column-packageStart {
+    flex: 0 0 10%;
+}
+
+.mobileView {
+    display: none;
+}
+
+// make table responsive
+@media screen and (max-width: 1207px) {
+
+    mat-header-row {
+        display: none;
+    }
+
+    mat-row {
+        display: block;
+    }
+
+    .onMobileNo {
+        display: none;
+    }
+
+    .mobileView {
+        font-weight: bold;
+        display: block;
+    }
+
+    fa {
+        font-size: 0.8em;
+    }
+}
+    

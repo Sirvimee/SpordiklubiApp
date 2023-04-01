@@ -1,0 +1,119 @@
+<div class="div d-flex justify-content-between">
+  <button routerLink="/register" mat-raised-button color="accent">
+    <i class="fa fa-arrow-left" aria-hidden=""true></i> 
+    Tagasi
+  </button>
+  <mat-form-field appearance="outline">
+    <mat-label>Otsi</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="" #input />
+  </mat-form-field>
+</div>
+
+<div class="example-container mat-elevation-z8">
+  <mat-table [dataSource]="dataSource" matSort>
+
+    <!-- Nr Column -->
+    <ng-container matColumnDef="nr">
+      <mat-header-cell *matHeaderCellDef class="onMobileNo">Nr</mat-header-cell>
+      <mat-cell *matCellDef="let i = index" class="onMobileNo">
+        {{this.paginator.pageIndex == 0 ? i + 1 : 1 + i + this.paginator.pageIndex * this.paginator.pageSize}}
+        </mat-cell>
+    </ng-container>
+
+    <!-- First Name Column -->
+    <ng-container matColumnDef="firstName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Eesnimi</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <span class="mobileView">Eesnimi:&nbsp;</span>
+        {{ row.firstName }}</mat-cell>
+    </ng-container>
+
+    <!-- Last Name Column -->
+    <ng-container matColumnDef="lastName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Perekonnanimi</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <span class="mobileView">Perekonnanimi:&nbsp;</span>
+        {{ row.lastName }}</mat-cell>
+    </ng-container>
+
+    <!-- Gender Column -->
+    <ng-container matColumnDef="gender">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Sugu</mat-header-cell>
+      <mat-cell *matCellDef="let row" class="onMobileNo">
+        <span class="mobileView">Sugu:&nbsp;</span>
+        {{ row.gender }}</mat-cell>
+    </ng-container>
+
+    <!-- E-mail Column -->
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>E-post</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <span class="mobileView">E-post:&nbsp;</span>
+        {{ row.email }}</mat-cell>
+    </ng-container>
+
+    <!-- Phone Column -->
+    <ng-container matColumnDef="mobile">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Telefon</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <span class="mobileView">Telefon:&nbsp;</span>
+        {{ row.mobile }}</mat-cell>
+    </ng-container>
+
+    <!-- Requirer Trainer Column -->
+    <!-- <ng-container matColumnDef="requireTrainer">
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="onMobileNo">Personaaltreener</mat-header-cell>
+      <mat-cell *matCellDef="let row" class="onMobileNo">{{ row.requireTrainer }}</mat-cell>
+    </ng-container> -->
+
+    <!-- Package Column -->
+    <ng-container matColumnDef="packageType">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Treeningpakett</mat-header-cell>
+      <mat-cell *matCellDef="let row" class="onMobileNo">
+        <span class="mobileView">Pakett:&nbsp;</span>
+        {{ row.packageType }}</mat-cell>
+    </ng-container>
+
+    <!-- Package Start Column -->
+    <ng-container matColumnDef="packageStart">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Paketi algus</mat-header-cell>
+      <mat-cell *matCellDef="let row" class="onMobileNo">
+        <span class="mobileView">Paketi algus:&nbsp;</span>
+        {{ row.packageStart | date: 'dd-MM-yyyy' }}</mat-cell>
+    </ng-container>
+
+    <!-- Action Column -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Tegevus</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button [routerLink]="['/detail', row.id]" mat-icon-button color="warn">
+          <i class="fa fa-eye"></i>
+        </button>
+        <!-- View -->
+        <button (click)="edit(row.id)" mat-icon-button color="accent">
+          <i class="fa fa-pencil"></i>
+        </button>
+        <!-- Edit -->
+        <button (click)="delete(row.id)" mat-icon-button color="primary">
+          <i class="fa fa-trash"></i>
+        </button>
+        <!-- Delete -->
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">
+        Treenijat ei leitud.
+      </td>
+    </tr>
+  </mat-table>
+
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    aria-label="Select page of users">
+  </mat-paginator>
+</div>

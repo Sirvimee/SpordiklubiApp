@@ -1,0 +1,77 @@
+<mat-card *ngIf="userDetail" class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{userDetail.firstName}} {{userDetail.lastName}}</mat-card-title>
+      <mat-card-subtitle>{{userDetail.gender}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-list>
+            <mat-list-item>
+                <div matLine>
+                    E-post:
+                    <button mat-button>{{userDetail.email}}</button>
+                </div>
+            </mat-list-item>
+            <mat-list-item>
+                <div matLine>
+                    Telefoninumber:
+                    <button mat-button>{{userDetail.mobile}}</button>
+                </div>
+            </mat-list-item>
+            <mat-list-item>
+                <div matLine>
+                    Kaal:
+                    <button mat-button>{{userDetail.weight}}</button>
+                </div>
+            </mat-list-item>
+            <mat-list-item>
+                <div matLine>
+                    Pikkus:
+                    <button mat-button>{{userDetail.height}}</button>
+                </div>
+            </mat-list-item>
+            <mat-list-item>
+                <div matLine>
+                    BMI:
+                    <button mat-button>{{userDetail.bmi}}</button>
+                </div>
+            </mat-list-item>
+            <mat-list-item>
+                <div matLine>
+                    BMI tulemus:
+                    <button mat-button>{{userDetail.bmiResult}}</button>
+                </div>
+            </mat-list-item>
+            <mat-list-item>
+                <div matLine>
+                    Omab personaaltreenerit:
+                    <button mat-button>{{userDetail.requireTrainer}}</button>
+                </div>
+            </mat-list-item>
+            <mat-list-item>
+                <div matLine>
+                    On varem spordiklubis käinud:
+                    <button mat-button>{{userDetail.haveGymBefore}}</button>
+                </div>
+            </mat-list-item>
+            <mat-list-item>
+                <div matLine>
+                    Treeningpakett:
+                    <button mat-button>{{userDetail.packageType}}</button>
+                </div>
+            </mat-list-item>
+            <mat-list-item>
+                <div matLine>
+                    Paketi algusaeg:
+                    <button mat-button>{{userDetail.packageStart | date: 'dd-MM-yyyy' }}</button>
+                </div>
+            </mat-list-item>
+            <div class="goal">
+                <div class="mb-2">Eesmärk:</div>
+                <ng-container *ngFor="let row of userDetail.goal">
+                <mat-chip-option selected class="m-1">{{row}}</mat-chip-option>
+                </ng-container>
+            </div>
+        </mat-list>
+    </mat-card-content>
+  </mat-card>

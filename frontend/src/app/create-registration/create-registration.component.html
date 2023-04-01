@@ -1,0 +1,143 @@
+<div class="logo text-center">
+  <img width="200" src="assets/logo.png" alt="logo" />
+</div>
+
+<div class="registration-form m-3 p-4">
+  <form [formGroup]="registerForm">
+    <div class="row">
+      <!-- First name -->
+      <div class="col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Eesnimi</mat-label>
+          <input formControlName="firstName" matInput placeholder="" />
+          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+      </div>
+      <!-- Last name -->
+      <div class="col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Perekonnanimi</mat-label>
+          <input formControlName="lastName" matInput placeholder="" />
+          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+      </div>
+      <!-- E-mail -->
+      <div class="col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>E-post</mat-label>
+          <input formControlName="email" matInput placeholder="" email="true"/>
+          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+          <mat-error *ngIf="email.errors">Palun sisesta korrektne meiliaadress.</mat-error>
+        </mat-form-field>
+      </div>
+      <!-- Phone number -->
+      <div class="col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Telefoninumber</mat-label>
+          <input type="number" formControlName="mobile" matInput placeholder="" />
+          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+      </div>
+      <!-- Weight -->
+      <div class="col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Kaal</mat-label>
+          <input type="number" formControlName="weight" matInput placeholder="" />
+          <mat-icon matSuffix>line_weight</mat-icon>
+          <mat-hint>Kaal kilogrammides</mat-hint>
+        </mat-form-field>
+      </div>
+      <!-- Height -->
+      <div class="col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Pikkus</mat-label>
+          <input [readonly]="!this.registerForm.value?.weight" type="number" 
+            formControlName="height" matInput placeholder="" />
+          <mat-icon matSuffix
+            ><i class="fa fa-text-height" aria-hidden="true"></i
+          ></mat-icon>
+          <mat-hint>Pikkus sentimeetrites</mat-hint>
+        </mat-form-field>
+      </div>
+      <!-- BMI -->
+      <div class="col-md-6 mt-4">
+        <mat-form-field appearance="outline">
+          <mat-label>BMI</mat-label>
+          <input readonly type="number" formControlName="bmi" matInput placeholder="" />
+          <mat-icon matSuffix><i class="fa fa-sort-numeric-desc" aria-hidden="true"></i></mat-icon>
+        </mat-form-field>
+      </div>
+      <!-- BMI Result -->
+      <div class="col-md-6 mt-4">
+        <mat-form-field appearance="outline">
+          <mat-label>BMI tulemus</mat-label>
+          <input readonly formControlName="bmiResult" matInput placeholder="" />
+          <mat-icon matSuffix><i class="fa fa-check" aria-hidden="true"></i></mat-icon>
+        </mat-form-field>
+      </div>
+      <!-- Package selection -->
+      <div class="col-md-6 mt-4">
+        <mat-form-field appearance="outline">
+          <mat-label>Vali pakett</mat-label>
+          <mat-select formControlName="packageType">
+            <mat-option *ngFor="let package of packages" [value]="package">
+              {{ package }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <!-- Date picker -->
+      <div class="col-md-6 mt-4">
+        <mat-form-field appearance="outline">
+            <mat-label>Paketi alguse kuupäev</mat-label>
+            <input formControlName="packageStart" matInput [matDatepicker]="picker">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+      </div>
+      <!-- Goal  -->
+      <div class="col-md-6 mt-4">
+        <mat-form-field appearance="outline">
+          <mat-label>Mis on sinu eesmärk?</mat-label>
+          <mat-select formControlName="goal" multiple>
+            <mat-option *ngFor="let goal of goalList" [value]="goal">
+              {{ goal }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <!-- Do you want personal trainer -->
+        <div class="mt-3">
+          <label id="example-radio-group-label">Kas sa soovid personaaltreenerit?</label>
+          <mat-radio-group formControlName="requireTrainer" class="example-radio-group">
+            <mat-radio-button class="example-radio-button" *ngFor="let trainerOpt of ['Jah', 'Ei']" [value]="trainerOpt" >
+              {{ trainerOpt }}
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <!-- Your gender -->
+        <div class="mt-3">
+          <label id="example-radio-group-label">Sinu sugu:</label>
+          <mat-radio-group formControlName="gender" class="example-radio-group">
+            <mat-radio-button class="example-radio-button" *ngFor="let gender of genders" [value]="gender" >
+              {{ gender }}
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <!-- Have you been in Gym before -->
+        <div class="mt-3">
+          <label id="example-radio-group-label">Kas sa oled varem spordiklubis käinud?</label>
+          <mat-radio-group formControlName="haveGymBefore" class="example-radio-group">
+            <mat-radio-button class="example-radio-button" *ngFor="let beenGym of ['Jah', 'Ei']" [value]="beenGym">
+              {{ beenGym }}
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+    </div>
+    <div class="text-center">
+    <button *ngIf="!isUpdateActive" (click)="submit()" class="mt-4" mat-raised-button color="accent">Kinnita</button>
+    <button *ngIf="isUpdateActive" (click)="update()" class="mt-4" mat-raised-button color="accent">Muuda</button>
+  </div>
+  </form>
+</div>
