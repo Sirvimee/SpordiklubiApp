@@ -1,7 +1,5 @@
 # SpordiklubiApp
 
-This project is hosted here: http://spordiklubi-registreerimise-frontend.s3-website.eu-north-1.amazonaws.com/register
-
 ## Backend
 ### Setting up Spring Boot application.
 
